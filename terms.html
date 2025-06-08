@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Summy - Terms of Service</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1e5e3c 0%, #2a8a58 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .app-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+        }
+        
+        .back-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: auto;
+            padding: 8px 16px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        
+        /* Content */
+        .content {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .content h2 {
+            color: #ffffff;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .content h3 {
+            color: #b3f5d1;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            margin: 25px 0 15px;
+            font-weight: 600;
+        }
+        
+        .content p {
+            color: #d0d0d0;
+            margin-bottom: 15px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .content ul {
+            margin: 15px 0 15px 20px;
+        }
+        
+        .content li {
+            color: #d0d0d0;
+            margin-bottom: 8px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        .highlight {
+            background-color: rgba(76, 175, 80, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #81C784;
+        }
+        
+        .pricing-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .pricing-option {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .pricing-option h4 {
+            color: #81C784;
+            margin-bottom: 5px;
+        }
+        
+        .contact-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .contact-box a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-box a:hover {
+            color: #66BB6A;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: #b0b0b0;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .footer-links {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #66BB6A;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+        
+        .copyright a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .copyright a:hover {
+            color: #66BB6A;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .back-link {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .app-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="app-title">
+                    <div class="app-icon">S</div>
+                    <h1>Terms of Service</h1>
+                </div>
+                <a href="javascript:history.back()" class="back-link">← Back to App</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <h2>Terms of Service for Summy</h2>
+            <p><strong>Last Updated:</strong> January 1, 2025</p>
+
+            <h3>1. Acceptance of Terms</h3>
+            <p>By downloading, accessing, or using the Summy mobile application, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our app.</p>
+
+            <h3>2. Description of Service</h3>
+            <p>Summy is a mobile text summarization application that provides users with AI-powered tools to condense long articles, documents, and texts into concise, meaningful summaries. The app offers both free content and premium subscription features.</p>
+
+            <h3>3. User Accounts</h3>
+            <p>To access certain features of Summy, you may be required to create an account. You are responsible for:</p>
+            <ul>
+                <li>Maintaining the confidentiality of your account credentials</li>
+                <li>All activities that occur under your account</li>
+                <li>Providing accurate and complete information</li>
+                <li>Notifying us immediately of any unauthorized use</li>
+            </ul>
+
+            <h3>4. Subscription Services</h3>
+            <p>Summy offers premium subscription services with <span class="highlight">three auto-renewable subscription options</span>:</p>
+            
+            <div class="pricing-box">
+                <h4>Auto-Renewable Subscription Plans</h4>
+                <div class="pricing-options">
+                    <div class="pricing-option">
+                        <h4>Summy Premium Weekly</h4>
+                        <p><strong>Length:</strong> 1 Week</p>
+                        <p><strong>Price:</strong> $1.99/week</p>
+                        <p>Unlimited text summarization and premium features with weekly billing</p>
+                    </div>
+                    <div class="pricing-option">
+                        <h4>Summy Premium Monthly</h4>
+                        <p><strong>Length:</strong> 1 Month</p>
+                        <p><strong>Price:</strong> $6.99/month</p>
+                        <p>Unlimited text summarization and premium features with monthly billing</p>
+                    </div>
+                    <div class="pricing-option">
+                        <h4>Summy Premium Annual</h4>
+                        <p><strong>Length:</strong> 1 Year</p>
+                        <p><strong>Price:</strong> $59.99/year ($5.00/month)</p>
+                        <p>Full year access with significant cost savings compared to monthly</p>
+                    </div>
+                </div>
+                
+                <h4>Subscription Terms:</h4>
+                <ul>
+                    <li>All subscriptions are processed through Apple's App Store</li>
+                    <li>Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period</li>
+                    <li>Your account will be charged for renewal within 24 hours prior to the end of the current period</li>
+                    <li>You can manage and cancel subscriptions through your App Store account settings</li>
+                    <li>No refunds for partial periods when cancelling</li>
+                    <li>Premium features remain accessible until the end of the current billing period after cancellation</li>
+                </ul>
+            </div>
+
+            <h3>5. Acceptable Use</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Use the app for any unlawful purpose or activity</li>
+                <li>Attempt to reverse engineer, hack, or manipulate the app</li>
+                <li>Submit inappropriate, harmful, or copyrighted content for summarization</li>
+                <li>Create multiple accounts to circumvent limitations</li>
+                <li>Use automated tools or scripts to interact with the app</li>
+                <li>Interfere with the proper functioning of the app</li>
+            </ul>
+
+            <h3>6. Intellectual Property</h3>
+            <p>All content in Summy, including but not limited to AI algorithms, software, graphics, and user interface, is owned by us or our licensors and is protected by copyright, trademark, and other intellectual property laws.</p>
+
+            <h3>7. User Content</h3>
+            <p>You retain ownership of the text content you submit for summarization. However, you grant us a limited license to process your content for the purpose of providing summarization services. We do not store or retain your text content beyond what is necessary for processing.</p>
+
+            <h3>8. Privacy</h3>
+            <p>Your privacy is important to us. Please review our Privacy Policy, which explains how we collect, use, and protect your information when you use our service.</p>
+
+            <h3>9. Disclaimers</h3>
+            <p>Summy is provided "as is" without warranties of any kind. We do not guarantee:</p>
+            <ul>
+                <li>Uninterrupted or error-free operation</li>
+                <li>Accuracy of AI-generated summaries</li>
+                <li>Compatibility with all devices or text formats</li>
+                <li>Availability of specific features or content</li>
+                <li>Perfect preservation of meaning in summaries</li>
+            </ul>
+
+            <h3>10. Limitation of Liability</h3>
+            <p>To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of Summy, including any loss of data or inaccuracies in summaries.</p>
+
+            <h3>11. Termination</h3>
+            <p>We may terminate or suspend your account and access to Summy at our discretion, without notice, for conduct that we believe violates these Terms of Service or is harmful to other users, us, or third parties, or for any other reason.</p>
+
+            <h3>12. Changes to Terms</h3>
+            <p>We reserve the right to modify these Terms of Service at any time. We will notify users of any material changes through the app. Your continued use of Summy after such modifications constitutes acceptance of the updated terms.</p>
+
+            <h3>13. Governing Law</h3>
+            <p>These Terms of Service are governed by and construed in accordance with applicable laws. Any disputes arising from these terms or your use of Summy will be subject to the jurisdiction of appropriate courts.</p>
+
+            <h3>14. App Store Terms</h3>
+            <p>Your use of Summy is also subject to Apple's App Store Terms of Service. In case of conflict between these terms and Apple's terms, Apple's terms shall prevail regarding App Store-related matters.</p>
+
+            <div class="contact-box">
+                <h3>15. Contact Information</h3>
+                <p>If you have any questions about these Terms of Service, please contact us at:</p>
+                <p><strong>Email:</strong> <a href="mailto:cingiz167@icloud.com">cingiz167@icloud.com</a></p>
+                <p><strong>App:</strong> Summy - Smart Text Summarizer</p>
+                <p><strong>Developer:</strong> Chingiz Agha, Sumgait</p>
+            </div>
+
+            <p><em>By using Summy, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</em></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#terms">Terms of Service</a>
+                <a href="#privacy">Privacy Policy</a>
+            </div>
+            <div class="copyright">
+                Made by <a href="https://chingizagha.com">Chingiz Agha</a> in Sumgait © 2025
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

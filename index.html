@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Summy - Smart Text Summarizer</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #e0e0e0;
+            background: linear-gradient(135deg, #1e5e3c 0%, #2a8a58 100%);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Main content area */
+        .main-content {
+            flex: 1 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 40px 0;
+            overflow: hidden;
+        }
+        
+        /* App presentation section */
+        .app-presentation {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: relative;
+            gap: 30px;
+        }
+        
+        .app-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 450px;
+            order: 1;
+        }
+        
+        .app-screenshot {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .app-info {
+            flex: 1;
+            max-width: 500px;
+            margin-bottom: 20px;
+            text-align: left;
+            order: 2;
+        }
+        
+        .app-branding {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 40px;
+            padding: 15px 0;
+            border-radius: 15px;
+        }
+        
+        .app-logo {
+            height: 120px;
+            width: auto;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+        }
+        
+        .app-info h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            font-weight: 700;
+        }
+        
+        .app-slogan {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-style: italic;
+            color: #b3f5d1;
+            margin-bottom: 20px;
+            font-weight: 300;
+            text-align: left;
+        }
+        
+        .app-info p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin: 0 0 30px;
+            color: #d0d0d0;
+            max-width: 450px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        /* App Store Button */
+        .app-store-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #000000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+            opacity: 0.9;
+        }
+        
+        .app-store-button svg {
+            margin-right: 12px;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        
+        .app-store-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .app-store-text small {
+            font-size: 0.9rem;
+            font-weight: normal;
+            line-height: 1;
+            opacity: 0.8;
+        }
+        
+        .app-store-text span {
+            font-size: 1.4rem;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        /* Support Section */
+        .support-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .support-section h2 {
+            color: #ffffff;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .support-section p {
+            color: #d0d0d0;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        .contact-button svg {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            color: #b0b0b0;
+            padding: 20px 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: auto;
+            flex-shrink: 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links a, .footer-links button {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        
+        .footer-links a:hover, .footer-links button:hover {
+            color: #66BB6A;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+        
+        .copyright a {
+            color: #4CAF50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .copyright a:hover {
+            color: #66BB6A;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .main-content {
+                padding: 20px 0 40px;
+                align-items: flex-start;
+            }
+            
+            .app-presentation {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 50px;
+            }
+            
+            .app-image {
+                order: 1;
+                margin-bottom: 20px;
+            }
+            
+            .app-info {
+                order: 2;
+                padding-right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            .app-branding {
+                justify-content: center;
+            }
+            
+            .app-slogan {
+                text-align: center;
+            }
+            
+            .app-info p {
+                text-align: center;
+            }
+            
+            .app-branding {
+                margin-bottom: 30px;
+                width: auto;
+                justify-content: center;
+            }
+            
+            .app-logo {
+                height: 100px;
+            }
+            
+            .app-screenshot {
+                max-width: 280px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 15px 0 30px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .copyright {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .app-branding {
+                margin-top: 10px;
+                padding: 12px 16px;
+            }
+
+            .support-section {
+                margin: 30px 0;
+                padding: 25px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .app-logo {
+                height: 80px;
+            }
+            
+            .main-content {
+                padding: 10px 0 30px;
+            }
+            
+            .app-branding {
+                margin-bottom: 25px;
+                padding: 10px 15px;
+            }
+            
+            .app-screenshot {
+                max-width: 250px;
+            }
+            
+            .footer-links {
+                gap: 15px;
+            }
+            
+            .footer-links a, .footer-links button, .copyright {
+                font-size: 0.85rem;
+            }
+            
+            .app-store-button {
+                padding: 10px 20px;
+            }
+            
+            .app-store-button svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .support-section {
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .app-info h1 {
+                font-size: 2rem;
+            }
+            
+            .app-logo {
+                height: 70px;
+            }
+            
+            .app-screenshot {
+                max-width: 220px;
+            }
+            
+            .app-branding {
+                padding: 8px 12px;
+            }
+        }
+        
+        /* Ensure proper viewport height on mobile */
+        @media screen and (max-height: 600px) {
+            .main-content {
+                padding: 10px 0 20px;
+            }
+            
+            .app-branding {
+                margin-bottom: 20px;
+            }
+            
+            .app-info p {
+                margin-bottom: 20px;
+            }
+
+            .support-section {
+                margin: 20px 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content area -->
+    <div class="main-content">
+        <div class="container">
+            <div class="app-presentation">
+                <div class="app-image">
+                    <img src="assets/summy-screenshot.png" alt="Summy App Screenshot" class="app-screenshot">
+                </div>
+                <div class="app-info">
+                    <div class="app-branding">
+                        <img src="assets/summy-logo.png" alt="Summy Logo" class="app-logo">
+                    </div>
+                    <h1>Summy</h1>
+                    <div class="app-slogan">Smart text summarization made simple</div>
+                    <p>
+                        Transform long articles, documents, and texts into concise, meaningful summaries in seconds. Powered by advanced AI technology, Summy helps you extract key insights and save valuable time.
+                    </p>
+                    <a href="https://apps.apple.com/az/app/summy-smart-summarizer/id6744865974" class="app-store-button" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 384 512" fill="white">
+                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                        </svg>
+                        <div class="app-store-text">
+                            <small>Download on the</small>
+                            <span>App Store</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Support Section
+            <div class="support-section">
+                <h2>Need Help?</h2>
+                <p>
+                    Have questions about Summy? Need technical support or want to provide feedback? 
+                    We're here to help! Contact us and we'll get back to you as soon as possible.
+                </p>
+                <button class="contact-button" onclick="contactSupport()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Contact Support
+                </button>
+            </div> -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <button onclick="contactSupport()">Contact</button>
+                </div>
+                <div class="copyright">
+                    Made by <a href="https://chingizagha.com">Chingiz Agha</a> in Sumgait &copy; 2025
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact support function
+        function contactSupport() {
+            const subject = encodeURIComponent('Summy App Support Request');
+            const body = encodeURIComponent('Hi,\n\nI need help with Summy app.\n\nMy question/issue:\n\n\nDevice information:\n- iOS Version: \n- App Version: \n\nThank you!');
+            const mailtoLink = `mailto:cingiz167@icloud.com?subject=${subject}&body=${body}`;
+            
+            window.location.href = mailtoLink;
+        }
+
+        // Ensure proper viewport height on mobile browsers
+        function setViewportHeight() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+
+        // Set viewport height on load and resize
+        window.addEventListener('load', setViewportHeight);
+        window.addEventListener('resize', setViewportHeight);
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setViewportHeight, 500);
+        });
+    </script>
+</body>
+</html>
