@@ -51,12 +51,13 @@
             display: flex;
             align-items: center;
             width: 100%;
-            justify-content: space-between;
+            justify-content: space-around;
             flex-wrap: wrap;
             position: relative;
-            gap: 30px;
+            gap: 20px;
         }
         
+        /* Simple Video Container */
         .app-image {
             flex: 1;
             display: flex;
@@ -66,20 +67,30 @@
             order: 1;
         }
         
-        .app-screenshot {
-            max-width: 300px;
+        .video-container {
+            position: relative;
+            max-width: 320px;
             width: 100%;
-            height: auto;
+            aspect-ratio: 9 / 16;
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-            display: block;
             border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .app-video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 23px;
+            object-fit: cover;
+            background: #1a1a1a;
         }
         
         .app-info {
-            flex: 1;
-            max-width: 500px;
+            flex: 0.8;
+            max-width: 450px;
             margin-bottom: 20px;
             text-align: left;
             order: 2;
@@ -89,13 +100,13 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding: 15px 0;
             border-radius: 15px;
         }
         
         .app-logo {
-            height: 120px;
+            height: 100px;
             width: auto;
             border-radius: 18px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
@@ -103,26 +114,52 @@
         }
         
         .app-info h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(3rem, 6vw, 5rem);
             color: #ffffff;
             letter-spacing: -0.5px;
             font-weight: 700;
+            margin-bottom: 20px;
         }
         
-        .app-slogan {
+        /* Animated Text */
+        .animated-text-container {
+            height: 80px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .animated-text {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
             font-style: italic;
             color: #b3f5d1;
-            margin-bottom: 20px;
             font-weight: 300;
-            text-align: left;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            animation: textSlide 12s infinite;
+        }
+        
+        .animated-text:nth-child(1) { animation-delay: 0s; }
+        .animated-text:nth-child(2) { animation-delay: 4s; }
+        .animated-text:nth-child(3) { animation-delay: 8s; }
+        
+        @keyframes textSlide {
+            0%, 25% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            33.33%, 100% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
         }
         
         .app-info p {
             font-size: clamp(1rem, 2vw, 1.2rem);
             margin: 0 0 30px;
             color: #d0d0d0;
-            max-width: 450px;
+            max-width: 400px;
             line-height: 1.6;
             text-align: left;
         }
@@ -315,10 +352,6 @@
                 justify-content: center;
             }
             
-            .app-slogan {
-                text-align: center;
-            }
-            
             .app-info p {
                 text-align: center;
             }
@@ -330,11 +363,11 @@
             }
             
             .app-logo {
-                height: 100px;
+                height: 80px;
             }
             
-            .app-screenshot {
-                max-width: 280px;
+            .video-container {
+                max-width: 350px;
                 margin-bottom: 20px;
             }
         }
@@ -369,6 +402,10 @@
                 margin: 30px 0;
                 padding: 25px 20px;
             }
+
+            .video-container {
+                max-width: 320px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -377,7 +414,7 @@
             }
             
             .app-logo {
-                height: 80px;
+                height: 70px;
             }
             
             .main-content {
@@ -389,8 +426,8 @@
                 padding: 10px 15px;
             }
             
-            .app-screenshot {
-                max-width: 250px;
+            .video-container {
+                max-width: 280px;
             }
             
             .footer-links {
@@ -413,6 +450,10 @@
             .support-section {
                 padding: 20px 15px;
             }
+
+            .animated-text-container {
+                height: 60px;
+            }
         }
         
         @media (max-width: 360px) {
@@ -421,11 +462,11 @@
             }
             
             .app-logo {
-                height: 70px;
+                height: 60px;
             }
             
-            .app-screenshot {
-                max-width: 220px;
+            .video-container {
+                max-width: 260px;
             }
             
             .app-branding {
@@ -460,16 +501,25 @@
         <div class="container">
             <div class="app-presentation">
                 <div class="app-image">
-                    <img src="assets/summy-screenshot.png" alt="Summy App Screenshot" class="app-screenshot">
+                    <div class="video-container">
+                        <video class="app-video" autoplay muted loop playsinline>
+                            <source src="assets/video01.MP4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                 </div>
                 <div class="app-info">
                     <div class="app-branding">
                         <img src="assets/AppIcon~ios-marketing.png" alt="Summy Logo" class="app-logo">
                     </div>
                     <h1>Summy</h1>
-                    <div class="app-slogan">Smart text summarization made simple</div>
+                    <div class="animated-text-container">
+                        <div class="animated-text">Smart text summarization made simple</div>
+                        <div class="animated-text">Transform long texts in seconds</div>
+                        <div class="animated-text">AI-powered insights at your fingertips</div>
+                    </div>
                     <p>
-                        Transform long articles, documents, and texts into concise, meaningful summaries in seconds. Powered by advanced AI technology, Summy helps you extract key insights and save valuable time.
+                        Save time with instant AI summaries. Turn lengthy articles into key insights.
                     </p>
                     <a href="https://apps.apple.com/az/app/summy-smart-summarizer/6744459688" class="app-store-button" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 384 512" fill="white">
@@ -483,12 +533,10 @@
                 </div>
             </div>
 
-
-            <div class="support-section">
+            <!-- <div class="support-section">
                 <h2>Need Help?</h2>
                 <p>
-                    Have questions about Summy? Need technical support or want to provide feedback? 
-                    We're here to help! Contact us and we'll get back to you as soon as possible.
+                    Questions about Summy? We're here to help! Contact us for support or feedback.
                 </p>
                 <button class="contact-button" onclick="contactSupport()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -497,7 +545,7 @@
                     </svg>
                     Contact Support
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 
